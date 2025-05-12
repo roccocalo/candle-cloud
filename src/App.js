@@ -1,24 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { CartProvider, CartContext } from './context/CartContext';
+import Navbar from './components/Navbar';
+import HomePage from './pages/HomePage';
+import ProductsPage from './pages/ProductsPage';
+import ProductDetailPage from './pages/ProductDetailPage';
+import CartPage from './pages/CartPage';
+
+// Componente interno che utilizza il context
+const AppContent = () => {
+  const { cart, addToCart, updateQuantity, removeFromCart, getCartItemsCount } = useContext(CartContext);
+  
+  return (
+    <div className="d-flex flex-column min-vh-100">
+      <Navbar cartItemsCount={getCartItemsCount()} />
+      <main className="flex-grow-1">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductsPage addToCart={addToCart} />} />
+          <Route path="/product/:id" element={<ProductDetailPage addToCart={addToCart} />} />
+          <Route 
+            path="/cart" 
+            element={
+              <CartPage 
+                cart={cart} 
+                updateQuantity={updateQuantity} 
+                removeFromCart={removeFromCart} 
+              />
+            } 
+          />
+        </Routes>
+      </main>
+      <footer className="bg-dark text-white text-center py-3 mt-5">
+        © {new Date().getFullYear()} E-Commerce App. Tutti i diritti riservati.
+      </footer>
+    </div>
+  );
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <CartProvider>
+        <AppContent />
+      </CartProvider>
+    </Router>
   );
 }
 
