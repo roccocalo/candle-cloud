@@ -129,5 +129,5 @@ footer {
 
 .checkout-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
+  box-shadow: 0 5px 15px rgba(0, 242, 68, 0.4);
 }
