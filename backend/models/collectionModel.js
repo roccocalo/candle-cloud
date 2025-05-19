@@ -21,14 +21,6 @@ const collectionSchema = mongoose.Schema({
     type: Boolean,
     default: false
   },
-  discountPercentage: {
-    type: Number,
-    default: 0
-  },
-  isActive: {
-    type: Boolean,
-    default: true
-  },
   season: {
     type: String,
     enum: ['primavera', 'estate', 'autunno', 'inverno', 'tutto l\'anno'],

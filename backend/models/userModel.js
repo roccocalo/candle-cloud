@@ -20,10 +20,6 @@ const userSchema = mongoose.Schema({
     required: true,
     default: false,
   },
-  wishlist: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Candle'
-  }],
   shippingAddresses: [{
     address: { type: String, required: true },
     city: { type: String, required: true },
