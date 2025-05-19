@@ -1,10 +1,12 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const cors = require('cors');
-const connectDB = require('./config/db');
 const path = require('path');
 
-dotenv.config();
+// Load env vars - make sure this points to the correct .env file
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
+const cors = require('cors');
+const connectDB = require('./config/db');
 
 // Connect to database
 connectDB();
@@ -29,7 +31,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 app.listen(PORT, () => {
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);

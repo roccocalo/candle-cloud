@@ -29,17 +29,6 @@ const orderSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  paymentResult: {
-    id: { type: String },
-    status: { type: String },
-    update_time: { type: String },
-    email_address: { type: String },
-  },
-  taxPrice: {
-    type: Number,
-    required: true,
-    default: 0.0,
-  },
   shippingPrice: {
     type: Number,
     required: true,
@@ -50,25 +39,10 @@ const orderSchema = mongoose.Schema({
     required: true,
     default: 0.0,
   },
-  isPaid: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
-  paidAt: {
-    type: Date,
-  },
   isDelivered: {
     type: Boolean,
     required: true,
     default: false,
-  },
-  deliveredAt: {
-    type: Date,
-  },
-  giftWrapping: {
-    isGift: { type: Boolean, default: false },
-    message: { type: String, default: '' }
   }
 }, {
   timestamps: true,
