@@ -6,6 +6,10 @@ import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import CartPage from './pages/CartPage';
+import LoginPage from './pages/auth/LoginPage';
+import RegisterPage from './pages/auth/RegisterPage';
+import ProfilePage from './pages/auth/ProfilePage';
+import { AuthProvider } from './context/AuthContext';
 
 // Componente interno che utilizza il context
 const AppContent = () => {
@@ -29,6 +33,9 @@ const AppContent = () => {
               />
             } 
           />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </main>
       <footer className="bg-dark text-white text-center py-3 mt-5">
@@ -41,9 +48,11 @@ const AppContent = () => {
 function App() {
   return (
     <Router>
-      <CartProvider>
-        <AppContent />
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <AppContent />
+        </CartProvider>
+      </AuthProvider>
     </Router>
   );
 }
