@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-
-
 const candleSchema = mongoose.Schema({
   name: {
     type: String,
@@ -31,8 +29,9 @@ const candleSchema = mongoose.Schema({
   }
 }, {
   timestamps: true,
+  collection: 'candele' // Explicitly specify the collection name to match your MongoDB
 });
 
-const Candle = mongoose.model('Candela', candleSchema);
+const Candle = mongoose.model('Candle', candleSchema);
 
 module.exports = Candle;

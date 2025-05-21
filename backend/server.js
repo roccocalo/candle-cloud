@@ -19,9 +19,11 @@ app.use(express.json());
 
 // Import routes
 const authRoutes = require('./routes/authRoutes');
+const candleRoutes = require('./routes/candleRoutes');
 
 // Mount routes
 app.use('/api/auth', authRoutes);
+app.use('/api/candles', candleRoutes);
 
 // Test route
 app.get('/api/test', (req, res) => {

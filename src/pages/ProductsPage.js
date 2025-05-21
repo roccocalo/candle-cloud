@@ -1,68 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import ProductCard from '../components/ProductCard';
+import axios from 'axios';
 
 const ProductsPage = ({ addToCart }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState('all');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // In un'applicazione reale, qui faresti una chiamata API
-    // Per semplicità, utilizziamo dati di esempio
-    const sampleProducts = [
-      {
-        id: 1,
-        title: 'Smartphone XYZ',
-        price: 499.99,
-        category: 'electronics',
-        image: 'https://via.placeholder.com/300',
-        description: 'Un potente smartphone con le ultime tecnologie.'
-      },
-      {
-        id: 2,
-        title: 'Laptop Pro',
-        price: 999.99,
-        category: 'electronics',
-        image: 'https://via.placeholder.com/300',
-        description: 'Laptop professionale per lavoro e gaming.'
-      },
-      {
-        id: 3,
-        title: 'T-Shirt Premium',
-        price: 29.99,
-        category: 'clothing',
-        image: 'https://via.placeholder.com/300',
-        description: 'T-shirt di alta qualità in cotone 100%.'
-      },
-      {
-        id: 4,
-        title: 'Scarpe Sportive',
-        price: 89.99,
-        category: 'clothing',
-        image: 'https://via.placeholder.com/300',
-        description: 'Scarpe comode per attività sportive.'
-      },
-      {
-        id: 5,
-        title: 'Orologio Elegante',
-        price: 199.99,
-        category: 'accessories',
-        image: 'https://via.placeholder.com/300',
-        description: 'Orologio elegante per ogni occasione.'
-      },
-      {
-        id: 6,
-        title: 'Borsa Designer',
-        price: 149.99,
-        category: 'accessories',
-        image: 'https://via.placeholder.com/300',
-        description: 'Borsa di design per un look sofisticato.'
+    const fetchCandles = async () => {
+      try {
+        setLoading(true);
+        const { data } = await axios.get('http://localhost:5001/api/candles');
+        setProducts(data);
+        setFilteredProducts(data);
+        setLoading(false);
+      } catch (err) {
+        setError('Errore nel caricamento delle candele');
+        setLoading(false);
+        console.error('Error fetching candles:', err);
       }
-    ];
-    
-    setProducts(sampleProducts);
-    setFilteredProducts(sampleProducts);
+    };
+
+    fetchCandles();
   }, []);
 
   useEffect(() => {
@@ -76,7 +39,7 @@ const ProductsPage = ({ addToCart }) => {
     // Filtra per termine di ricerca
     if (searchTerm) {
       result = result.filter(product => 
-        product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.description.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
@@ -86,14 +49,14 @@ const ProductsPage = ({ addToCart }) => {
 
   return (
     <div className="container py-5">
-      <h1 className="text-center mb-4">I Nostri Prodotti</h1>
+      <h1 className="text-center mb-4">Le Nostre Candele</h1>
       
       <div className="row mb-4 justify-content-center">
         <div className="col-md-6">
           <input 
             type="text" 
             className="form-control" 
-            placeholder="Cerca prodotti..." 
+            placeholder="Cerca candele..." 
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -105,23 +68,52 @@ const ProductsPage = ({ addToCart }) => {
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value="all">Tutte le categorie</option>
-            <option value="electronics">Elettronica</option>
-            <option value="clothing">Abbigliamento</option>
-            <option value="accessories">Accessori</option>
+            <option value="profumata">Profumate</option>
+            <option value="decorativa">Decorative</option>
+            <option value="votiva">Votive</option>
+            <option value="tealight">Tealight</option>
+            <option value="galleggiante">Galleggianti</option>
+            <option value="pilastro">Pilastro</option>
+            <option value="cera di soia">Cera di soia</option>
+            <option value="cera d'api">Cera d'api</option>
           </select>
         </div>
       </div>
       
-      <div className="row justify-content-center">
-        {filteredProducts.map(product => (
-          <div className="col-md-4 col-lg-3 mb-4" key={product.id}>
-            <ProductCard 
-              product={product} 
-              addToCart={addToCart} 
-            />
+      {loading ? (
+        <div className="text-center">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Caricamento...</span>
           </div>
-        ))}
-      </div>
+        </div>
+      ) : error ? (
+        <div className="alert alert-danger">{error}</div>
+      ) : (
+        <div className="row justify-content-center">
+          {filteredProducts.length === 0 ? (
+            <div className="col-12 text-center">
+              <p>Nessuna candela trovata</p>
+            </div>
+          ) : (
+            filteredProducts.map(product => (
+              <div className="col-md-4 col-lg-3 mb-4" key={product._id}>
+                <ProductCard 
+                  product={{
+                    id: product._id,
+                    title: product.name,
+                    price: product.price,
+                    category: product.category,
+                    image: product.image,
+                    description: product.description,
+                    burnTime: product.burnTime
+                  }} 
+                  addToCart={addToCart} 
+                />
+              </div>
+            ))
+          )}
+        </div>
+      )}
     </div>
   );
 };
