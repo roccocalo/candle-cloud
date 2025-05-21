@@ -17,9 +17,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Routes (da implementare)
-app.get('/api/candles', (req, res) => {
-  res.json({ message: 'API delle candele funzionante' });
+// Import routes
+const authRoutes = require('./routes/authRoutes');
+
+// Mount routes
+app.use('/api/auth', authRoutes);
+
+// Test route
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'API funzionante' });
 });
 
 // Serve static assets if in production
