@@ -1,8 +1,5 @@
 const Candle = require('../models/candleModel');
 
-// @desc    Fetch all candles
-// @route   GET /api/candles
-// @access  Public
 const getCandles = async (req, res) => {
   try {
     const candles = await Candle.find({});
@@ -12,9 +9,6 @@ const getCandles = async (req, res) => {
   }
 };
 
-// @desc    Fetch single candle
-// @route   GET /api/candles/:id
-// @access  Public
 const getCandleById = async (req, res) => {
   try {
     const candle = await Candle.findById(req.params.id);

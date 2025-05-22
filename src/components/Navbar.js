@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = ({ cartItemsCount }) => {
-  // Check if user is logged in
   const isLoggedIn = localStorage.getItem('userInfo') ? true : false;
   const navigate = useNavigate();
 

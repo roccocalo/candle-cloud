@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './index.css';
-import './custom.css'; // Importiamo il nostro file CSS personalizzato
+import './custom.css'; 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

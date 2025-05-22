@@ -22,7 +22,6 @@ const addCartItem = async (productId, quantity, token) => {
   return response.data;
 };
 
-// Per rimuovere un prodotto
 const removeCartItem = async (productId, token) => {
   const config = {
     headers: {
@@ -33,7 +32,6 @@ const removeCartItem = async (productId, token) => {
   return response.data;
 };
 
-// Per svuotare il carrello
 const clearCart = async (token) => {
   const config = {
     headers: {

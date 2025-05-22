@@ -3,7 +3,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [userInfo, setUserInfo] = useState(null);  // Cambiato da user a userInfo
+  const [userInfo, setUserInfo] = useState(null);  
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

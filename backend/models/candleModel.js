@@ -24,12 +24,12 @@ const candleSchema = mongoose.Schema({
     default: 0,
   },
   burnTime: {
-    type: Number, // in ore
+    type: Number, 
     default: 0
   }
 }, {
   timestamps: true,
-  collection: 'candele' // Explicitly specify the collection name to match your MongoDB
+  collection: 'candele' 
 });
 
 const Candle = mongoose.model('Candle', candleSchema);

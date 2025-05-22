@@ -9,24 +9,19 @@ const getCart = async (req, res) => {
                           path: 'items.product',
                           select: 'name price image description category burnTime' // Cambiato 'title' in 'name'
                         });
-    
-    console.log('Carrello trovato:', cart);
-    
+        
     if (!cart) {
       console.log('Nessun carrello trovato, ne creo uno nuovo');
       cart = await Cart.create({
         user: req.user._id,
         items: []
       });
-      console.log('Nuovo carrello creato:', cart);
     }
     
     if (!cart.items || cart.items.length === 0) {
-      console.log('Carrello vuoto');
       return res.status(200).json({ items: [] });
     }
     
-    console.log('Invio carrello al client:', cart);
     res.status(200).json(cart);
   } catch (error) {
     console.error('Errore dettagliato:', error);
@@ -37,7 +32,6 @@ const getCart = async (req, res) => {
   }
 };
 
-// Aggiungi un prodotto al carrello
 const addToCart = async (req, res) => {
   try {
     const { productId, quantity } = req.body;
@@ -70,7 +64,6 @@ const addToCart = async (req, res) => {
   }
 };
 
-// Rimuovi un prodotto dal carrello
 const removeFromCart = async (req, res) => {
   try {
     const { productId } = req.params;
@@ -98,14 +91,12 @@ const clearCart = async (req, res) => {
   try {
     const userId = req.user._id;
     
-    // Trova il carrello dell'utente e svuotalo
     const cart = await Cart.findOne({ user: userId });
     
     if (!cart) {
       return res.status(404).json({ message: 'Carrello non trovato' });
     }
     
-    // Svuota gli elementi del carrello
     cart.items = [];
     await cart.save();
     

@@ -4,7 +4,7 @@ const cartItemSchema = new mongoose.Schema({
   product: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'Candle'  // Cambiato da 'Product' a 'Candle'
+    ref: 'Candle'  
   },
   quantity: {
     type: Number,

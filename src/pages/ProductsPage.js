@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ProductCard from '../components/ProductCard';
+import ProductCard from './ProductCard';
 import axios from 'axios';
 
 const ProductsPage = ({ addToCart }) => {
@@ -31,12 +31,10 @@ const ProductsPage = ({ addToCart }) => {
   useEffect(() => {
     let result = [...products];
     
-    // Filtra per categoria
     if (category !== 'all') {
       result = result.filter(product => product.category === category);
     }
     
-    // Filtra per termine di ricerca
     if (searchTerm) {
       result = result.filter(product => 
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

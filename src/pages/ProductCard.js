@@ -13,7 +13,6 @@ const ProductCard = ({ product }) => {
     }
     
     try {
-      // Passa l'ID del prodotto invece dell'oggetto completo
       await addToCart(product.id || product._id, 1);
     } catch (error) {
       console.error('Errore nell\'aggiunta al carrello:', error);
@@ -41,10 +40,11 @@ const ProductCard = ({ product }) => {
         <div className="d-flex justify-content-between align-items-center mt-auto">
           <span className="h5 mb-0">€{product.price.toFixed(2)}</span>
           <button 
-            className="add-to-cart-button"
+            className="btn btn-primary rounded-circle p-3 d-flex justify-content-center align-items-center"
+            style={{ width: '50px', height: '50px', backgroundColor: '#6610f2' }}
             onClick={handleAddToCart}
           >
-            Aggiungi
+            <i className="bi bi-cart-plus"></i>
           </button>
         </div>
       </div>
