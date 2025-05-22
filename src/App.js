@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { CartProvider, CartContext } from './context/CartContext';
+import { CartProvider } from './context/CartContext';
+import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
@@ -9,30 +10,18 @@ import CartPage from './pages/CartPage';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import ProfilePage from './pages/auth/ProfilePage';
-import { AuthProvider } from './context/AuthContext';
 
 // Componente interno che utilizza il context
 const AppContent = () => {
-  const { cart, addToCart, updateQuantity, removeFromCart, getCartItemsCount } = useContext(CartContext);
-  
   return (
     <div className="d-flex flex-column min-vh-100">
-      <Navbar cartItemsCount={getCartItemsCount()} />
+      <Navbar />
       <main className="flex-grow-1">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/products" element={<ProductsPage addToCart={addToCart} />} />
-          <Route path="/product/:id" element={<ProductDetailPage addToCart={addToCart} />} />
-          <Route 
-            path="/cart" 
-            element={
-              <CartPage 
-                cart={cart} 
-                updateQuantity={updateQuantity} 
-                removeFromCart={removeFromCart} 
-              />
-            } 
-          />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/product/:id" element={<ProductDetailPage />} />
+          <Route path="/cart" element={<CartPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/profile" element={<ProfilePage />} />

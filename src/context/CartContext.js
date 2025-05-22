@@ -1,80 +1,87 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import { cartService } from '../services/cartService';
+import { useAuth } from './AuthContext';
 
-export const CartContext = createContext();
+const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
-  
-  // Carica il carrello dal localStorage all'avvio
+  const [cartItems, setCartItems] = useState([]);
+  const { userInfo } = useAuth();
+
+  // Carica il carrello quando l'utente è autenticato
   useEffect(() => {
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-      setCart(JSON.parse(savedCart));
-    }
-  }, []);
-  
-  // Salva il carrello nel localStorage quando cambia
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
-  
-  // Aggiungi un prodotto al carrello
-  const addToCart = (product) => {
-    setCart(prevCart => {
-      // Controlla se il prodotto è già nel carrello
-      const existingItem = prevCart.find(item => item.id === product.id);
-      
-      if (existingItem) {
-        // Aggiorna la quantità se il prodotto è già nel carrello
-        return prevCart.map(item => 
-          item.id === product.id 
-            ? { ...item, quantity: item.quantity + 1 } 
-            : item
-        );
-      } else {
-        // Aggiungi il nuovo prodotto al carrello
-        return [...prevCart, { ...product, quantity: 1 }];
+    const loadCart = async () => {
+      if (userInfo && userInfo.token) {
+        try {
+          const cart = await cartService.getCartItems(userInfo.token);
+          console.log('Carrello caricato:', cart); // Debug
+          setCartItems(cart.items || []);
+        } catch (error) {
+          console.error('Errore nel caricamento del carrello:', error);
+          setCartItems([]);
+        }
       }
-    });
-  };
-  
-  // Aggiorna la quantità di un prodotto nel carrello
-  const updateQuantity = (productId, newQuantity) => {
-    if (newQuantity <= 0) {
-      // Se la quantità è 0 o meno, rimuovi il prodotto
-      removeFromCart(productId);
-    } else {
-      setCart(prevCart => 
-        prevCart.map(item => 
-          item.id === productId 
-            ? { ...item, quantity: newQuantity } 
-            : item
-        )
+    };
+
+    loadCart();
+  }, [userInfo]);
+
+  const addToCart = async (productId, quantity = 1) => {
+    try {
+      if (!userInfo) return;
+      
+      // Ora accetta direttamente l'ID del prodotto
+      const updatedCart = await cartService.addCartItem(
+        productId,
+        quantity,
+        userInfo.token
       );
+      console.log('Carrello aggiornato dopo aggiunta:', updatedCart); // Debug
+      setCartItems(updatedCart.items || []);
+    } catch (error) {
+      console.error('Errore nell\'aggiunta al carrello:', error);
     }
   };
-  
-  // Rimuovi un prodotto dal carrello
-  const removeFromCart = (productId) => {
-    setCart(prevCart => prevCart.filter(item => item.id !== productId));
+
+  const removeFromCart = async (productId) => {
+    try {
+      if (!userInfo) return;
+      
+      console.log('Rimozione prodotto dal carrello:', productId); // Debug
+      const updatedCart = await cartService.removeCartItem(productId, userInfo.token);
+      console.log('Carrello aggiornato dopo rimozione:', updatedCart); // Debug
+      setCartItems(updatedCart.items || []);
+    } catch (error) {
+      console.error('Errore nella rimozione dal carrello:', error);
+    }
   };
-  
-  // Calcola il numero totale di articoli nel carrello
-  const getCartItemsCount = () => {
-    return cart.reduce((total, item) => total + item.quantity, 0);
+
+  const clearCart = async () => {
+    try {
+      if (!userInfo) return;
+      
+      console.log('Svuotamento carrello'); // Debug
+      const result = await cartService.clearCart(userInfo.token);
+      console.log('Risultato svuotamento carrello:', result); // Debug
+      setCartItems([]);
+    } catch (error) {
+      console.error('Errore nello svuotamento del carrello:', error);
+    }
   };
-  
+
   return (
-    <CartContext.Provider 
-      value={{ 
-        cart, 
-        addToCart, 
-        updateQuantity, 
-        removeFromCart,
-        getCartItemsCount
-      }}
-    >
+    <CartContext.Provider value={{
+      cartItems,
+      addToCart,
+      removeFromCart,
+      clearCart,  // Aggiungi la nuova funzione
+      cartItems: cartItems || [], // Assicuriamoci che sia sempre un array
+      addToCart,
+      removeFromCart
+    }}>
       {children}
     </CartContext.Provider>
   );
 };
+
+export const useCart = () => useContext(CartContext);

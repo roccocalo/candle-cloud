@@ -3,38 +3,31 @@ import { useAuth } from '../../context/AuthContext';
 import { authService } from '../../services/authService';
 
 const ProfilePage = () => {
-  const { user, login } = useAuth();
+  const { userInfo } = useAuth();
   const [formData, setFormData] = useState({
-    name: user?.name || '',
-    email: user?.email || '',
-    password: '',
-    newPassword: ''
+    name: userInfo?.name || '',
+    email: userInfo?.email || '',
   });
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
+  
+  // Ottieni la data corrente in formato italiano
+  const oggi = new Date().toLocaleDateString('it-IT', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
 
   useEffect(() => {
-    if (user) {
+    if (userInfo) {
       setFormData(prev => ({
         ...prev,
-        name: user.name,
-        email: user.email
+        name: userInfo.name,
+        email: userInfo.email
       }));
     }
-  }, [user]);
+  }, [userInfo]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const updatedUser = await authService.getProfile(user.token);
-      login(updatedUser);
-      setMessage('Profilo aggiornato con successo');
-    } catch (err) {
-      setError(err.response?.data?.message || 'Errore durante l\'aggiornamento');
-    }
-  };
-
-  if (!user) {
+  if (!userInfo) {
     return <div>Accesso non autorizzato</div>;
   }
 
@@ -44,32 +37,29 @@ const ProfilePage = () => {
         <div className="col-md-8">
           <div className="card">
             <div className="card-body">
-              <h2 className="text-center mb-4">Il Mio Profilo</h2>
-              {message && <div className="alert alert-success">{message}</div>}
-              {error && <div className="alert alert-danger">{error}</div>}
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label className="form-label">Nome</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  />
+              <div className="text-center mb-4">
+                <h2>Il tuo profilo</h2>
+                <div className="alert alert-info mt-3">
+                  <h4>Ciao {userInfo.name}!</h4>
+                  <p>Oggi è {oggi}</p>
                 </div>
-                <div className="mb-3">
-                  <label className="form-label">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    value={formData.email}
-                    readOnly
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary">
-                  Aggiorna Profilo
-                </button>
-              </form>
+              </div>
+              
+              <div className="mb-3">
+                <label className="form-label fw-bold">Nome:</label>
+                <p className="form-control">{formData.name}</p>
+              </div>
+              
+              <div className="mb-3">
+                <label className="form-label fw-bold">Email:</label>
+                <p className="form-control">{formData.email}</p>
+              </div>
+              
+              <div className="text-center mt-4">
+                <p className="text-muted">
+                  Benvenuto nel tuo spazio personale. Qui puoi visualizzare i tuoi dati.
+                </p>
+              </div>
             </div>
           </div>
         </div>

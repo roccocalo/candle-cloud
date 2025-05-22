@@ -3,29 +3,29 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);  // Cambiato da user a userInfo
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const userInfo = localStorage.getItem('userInfo');
-    if (userInfo) {
-      setUser(JSON.parse(userInfo));
+    const storedUserInfo = localStorage.getItem('userInfo');
+    if (storedUserInfo) {
+      setUserInfo(JSON.parse(storedUserInfo));
     }
     setLoading(false);
   }, []);
 
   const login = (userData) => {
-    setUser(userData);
+    setUserInfo(userData);
     localStorage.setItem('userInfo', JSON.stringify(userData));
   };
 
   const logout = () => {
-    setUser(null);
+    setUserInfo(null);
     localStorage.removeItem('userInfo');
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ userInfo, login, logout, loading }}>
       {!loading && children}
     </AuthContext.Provider>
   );

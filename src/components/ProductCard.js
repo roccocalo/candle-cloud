@@ -1,6 +1,26 @@
 import React from 'react';
+import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 
-const ProductCard = ({ product, addToCart }) => {
+const ProductCard = ({ product }) => {
+  const { addToCart } = useCart();
+  const { userInfo } = useAuth();
+
+  const handleAddToCart = async () => {
+    if (!userInfo) {
+      alert('Devi effettuare il login per aggiungere prodotti al carrello');
+      return;
+    }
+    
+    try {
+      // Passa l'ID del prodotto invece dell'oggetto completo
+      await addToCart(product.id || product._id, 1);
+    } catch (error) {
+      console.error('Errore nell\'aggiunta al carrello:', error);
+      alert('Si è verificato un errore nell\'aggiunta al carrello');
+    }
+  };
+
   return (
     <div className="card h-100 shadow-sm">
       <img 
@@ -21,10 +41,10 @@ const ProductCard = ({ product, addToCart }) => {
         <div className="d-flex justify-content-between align-items-center mt-auto">
           <span className="h5 mb-0">€{product.price.toFixed(2)}</span>
           <button 
-            className="btn btn-primary btn-sm"
-            onClick={() => addToCart(product)}
+            className="add-to-cart-button"
+            onClick={handleAddToCart}
           >
-            <i className="bi bi-cart-plus"></i> Aggiungi
+            Aggiungi
           </button>
         </div>
       </div>

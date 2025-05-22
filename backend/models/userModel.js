@@ -14,19 +14,7 @@ const userSchema = mongoose.Schema({
   password: {
     type: String,
     required: true,
-  },
-  isAdmin: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
-  shippingAddresses: [{
-    address: { type: String, required: true },
-    city: { type: String, required: true },
-    postalCode: { type: String, required: true },
-    country: { type: String, required: true },
-    isDefault: { type: Boolean, default: false }
-  }]
+  }
 }, {
   timestamps: true,
 });

@@ -20,10 +20,12 @@ app.use(express.json());
 // Import routes
 const authRoutes = require('./routes/authRoutes');
 const candleRoutes = require('./routes/candleRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 
 // Mount routes
 app.use('/api/auth', authRoutes);
 app.use('/api/candles', candleRoutes);
+app.use('/api/cart', cartRoutes);  // Aggiungi questa riga
 
 // Test route
 app.get('/api/test', (req, res) => {
