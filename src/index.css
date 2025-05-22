@@ -20,7 +20,6 @@ code {
     monospace;
 }
 
-/* Stili personalizzati per integrare con Bootstrap */
 .product-card {
   transition: transform 0.3s ease;
 }

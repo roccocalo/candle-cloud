@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { authService } from '../../services/authService';
 
 const ProfilePage = () => {
   const { userInfo } = useAuth();
@@ -9,7 +8,6 @@ const ProfilePage = () => {
     email: userInfo?.email || '',
   });
   
-  // Ottieni la data corrente in formato italiano
   const oggi = new Date().toLocaleDateString('it-IT', {
     weekday: 'long',
     year: 'numeric',
