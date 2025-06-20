@@ -21,7 +21,6 @@ const registerUser = async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        isAdmin: user.isAdmin,
         token: generateToken(user._id),
       });
     }
@@ -41,7 +40,6 @@ const loginUser = async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        isAdmin: user.isAdmin,
         token: generateToken(user._id),
       });
     } else {
@@ -61,7 +59,6 @@ const getUserProfile = async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        isAdmin: user.isAdmin,
       });
     } else {
       res.status(404).json({ message: 'Utente non trovato' });

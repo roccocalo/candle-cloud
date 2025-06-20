@@ -5,8 +5,8 @@ const HomePage = () => {
   return (
     <div className="container py-5">
       <div className="hero-section text-center">
-        <h1 className="display-4 mb-3">Benvenuto nel nostro negozio</h1>
-        <p className="lead text-muted mb-4">Scopri i nostri prodotti</p>
+        <h1 className="display-4 mb-3">Accendi la magia in ogni momento</h1>
+        <p className="lead text-muted mb-4">Esplora tutte le nostre candele</p>
         <Link to="/products" className="btn btn-success btn-lg">
           Inizia lo Shopping
         </Link>
