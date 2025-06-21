@@ -1,74 +1,122 @@
-# Getting Started with Create React App
+# CandleCloud E-commerce
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Progetto universitario per il corso di Sviluppo Web - Applicazione e-commerce per la vendita di candele.
 
-## Available Scripts
+![CandleCloud Preview](public/images/readme.jpg)
 
-In the project directory, you can run:
+## 📋 Descrizione
 
-### `npm start`
+CandleCloud è un'applicazione e-commerce completa sviluppata con tecnologie moderne per la vendita di candele artigianali. Il progetto include funzionalità di autenticazione utente, gestione carrello, catalogo prodotti e sistema di checkout.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Deployment
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+L'applicazione è stata deployata utilizzando servizi cloud gratuiti:
 
-### `npm test`
+- **Frontend**: [https://e-commerce-web-brown-ten.vercel.app/](https://e-commerce-web-brown-ten.vercel.app/)
+- **Backend**: [https://e-commerce-fs95.onrender.com](https://e-commerce-fs95.onrender.com)
+- **Database**: MongoDB Atlas
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠️ Tecnologie Utilizzate
 
-### `npm run build`
+### Frontend
+- **React 18** - Libreria JavaScript per UI
+- **React Router** - Navigazione tra pagine
+- **Bootstrap 5** - Framework CSS
+- **Axios** - Client HTTP per API calls
+- **Context API** - State management
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Backend
+- **Node.js** - Runtime JavaScript
+- **Express.js** - Framework web
+- **MongoDB** - Database NoSQL
+- **Mongoose** - ODM per MongoDB
+- **JWT** - Autenticazione e autorizzazione
+- **bcryptjs** - Hashing password
 
 
+## ✨ Funzionalità Implementate
 
-FRONTEND: https://web-e-commerce-three.vercel.app/
+- ✅ **Autenticazione completa** (Registrazione, Login, Logout)
+- ✅ **Catalogo prodotti** con ricerca e filtri per categoria
+- ✅ **Gestione carrello** (Aggiungi, rimuovi, modifica quantità)
+- ✅ **Profilo utente** personalizzato
+- ✅ **Design responsive** con Bootstrap
+- ✅ **API RESTful** complete
+- ✅ **Sicurezza** con JWT e password hashing
+- ✅ **Validazione dati** lato client e server
+
+## 🎨 Categorie Prodotti
+
+- Candele profumate
+- Candele decorative
+- Candele votive
+- Tealight
+- Candele galleggianti
+- Candele pilastro
+- Candele in cera di soia
+- Candele in cera d'api
+
+## 🔧 Installazione Locale
+
+### Prerequisiti
+- Node.js (versione 16+)
+- MongoDB locale o Atlas
+- Git
+
+### Clone del repository
+```bash
+git clone [url-repository]
+cd candlecloud
+```
+
+### Configurazione Backend
+```bash
+# Installa dipendenze
+npm install
+
+# Configura variabili d'ambiente
+# Crea un file .env nella root con:
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+NODE_ENV=development
+PORT=5001
+
+# Avvia il server backend
+npm run dev
+```
+
+### Configurazione Frontend
+```bash
+# In un nuovo terminale, avvia React
+npm start
+```
+
+L'applicazione sarà disponibile su:
+- Frontend: http://localhost:3000
+- Backend: http://localhost:5001
+
+## 📱 Screenshots
+
+L'applicazione include:
+- Homepage accattivante con hero section
+- Pagina prodotti con filtri e ricerca
+- Sistema di autenticazione completo
+- Carrello funzionale
+- Design moderno e responsive
+
+## 🐳 Docker Support
+
+Il progetto include configurazione Docker per deployment containerizzato:
+
+```bash
+# Avvia con Docker Compose
+docker-compose up --build
+```
+
+## 👨‍💻 Sviluppatore
+
+Progetto sviluppato come parte del corso universitario di Sviluppo Web.
+
+## 📄 Licenza
+
+Questo progetto è stato creato per scopi educativi nell'ambito universitario.
