@@ -22,14 +22,12 @@ app.use('/api/auth', authRoutes);
 app.use('/api/candles', candleRoutes);
 app.use('/api/cart', cartRoutes);  
 
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../build')));
   
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
-  });
-}
+ // Semplice route di test per la root
+app.get('/', (req, res) => {
+  res.json({ message: 'CandleCloud Backend API is running!' });
+});
+
 
 const PORT = process.env.PORT || 5001;
 
