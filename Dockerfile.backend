@@ -1,0 +1,17 @@
+FROM node:18-alpine
+
+# Imposta la directory di lavoro
+WORKDIR /app
+
+# Copia package.json e installa dipendenze
+COPY package*.json ./
+RUN npm ci --only=production
+
+# Copia il codice del backend
+COPY backend/ ./backend/
+
+# Espone la porta 5001
+EXPOSE 5001
+
+# Avvia il server
+CMD ["node", "backend/server.js"]

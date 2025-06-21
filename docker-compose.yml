@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # Backend API
+  backend:
+    build: 
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: candlecloud-backend
+    restart: unless-stopped
+    ports:
+      - "5001:5001"
+    environment:
+      NODE_ENV: development
+      PORT: 5001
+      MONGO_URI: ${MONGO_URI}
+      JWT_SECRET: ${JWT_SECRET}
+    networks:
+      - candlecloud-network
+
+ # Frontend React
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: candlecloud-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_API_URL: http://localhost:5001
+    networks:
+      - candlecloud-network
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+networks:
+  candlecloud-network:
+    driver: bridge
