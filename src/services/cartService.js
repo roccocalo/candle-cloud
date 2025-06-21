@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5001/api/cart';
+const API_URL = 'https://candlecloud-backend.onrender.com/api/cart';
 
 const getCartItems = async (token) => {
   const config = {

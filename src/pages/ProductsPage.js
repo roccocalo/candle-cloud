@@ -14,7 +14,7 @@ const ProductsPage = ({ addToCart }) => {
     const fetchCandles = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get('http://localhost:5001/api/candles');
+        const { data } = await axios.get('https://candlecloud-backend.onrender.com/api/candles');
         setProducts(data);
         setFilteredProducts(data);
         setLoading(false);

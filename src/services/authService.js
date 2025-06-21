@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5001/api/auth';
+const API_URL = 'https://candlecloud-backend.onrender.com/api/auth';
 
 const register = async (userData) => {
   const response = await axios.post(`${API_URL}/register`, userData);
