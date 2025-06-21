@@ -11,7 +11,18 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  origin: [
+    /\.vercel\.app$/,     
+    /\.onrender\.com$/    
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const authRoutes = require('./routes/authRoutes');
