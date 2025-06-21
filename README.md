@@ -2,7 +2,7 @@
 
 Progetto universitario per il corso di Sviluppo Web - Applicazione e-commerce per la vendita di candele.
 
-![CandleCloud Preview](public/readme.jpg)
+![CandleCloud Preview](public/images/readme.jpg)
 
 ## 📋 Descrizione
 
