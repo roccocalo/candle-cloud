@@ -1,20 +1,18 @@
 # CandleCloud E-commerce
 
-Progetto universitario per il corso di Sviluppo Web - Applicazione e-commerce per la vendita di candele.
+Progetto universitario per il corso di Fondamenti Web. 
 
 ![CandleCloud Preview](public/images/readme.jpg)
 
 ## 📋 Descrizione
 
-CandleCloud è un'applicazione e-commerce completa sviluppata con tecnologie moderne per la vendita di candele artigianali. Il progetto include funzionalità di autenticazione utente, gestione carrello, catalogo prodotti e sistema di checkout.
+CandleCloud è un'e-commerce completa sviluppata con tecnologie moderne per la vendita di candele artigianali. Il progetto include funzionalità di autenticazione utente, gestione carrello, catalogo prodotti e sistema di checkout.
 
 ## 🚀 Deployment
 
 L'applicazione è stata deployata utilizzando servizi cloud gratuiti:
 
-- **Frontend**: [https://e-commerce-web-brown-ten.vercel.app/](https://e-commerce-web-brown-ten.vercel.app/)
-- **Backend**: [https://e-commerce-fs95.onrender.com](https://e-commerce-fs95.onrender.com)
-- **Database**: MongoDB Atlas
+- **Live Preview**: [https://e-commerce-web-brown-ten.vercel.app/](https://e-commerce-web-brown-ten.vercel.app/)
 
 ## 🛠️ Tecnologie Utilizzate
 
@@ -23,7 +21,6 @@ L'applicazione è stata deployata utilizzando servizi cloud gratuiti:
 - **React Router** - Navigazione tra pagine
 - **Bootstrap 5** - Framework CSS
 - **Axios** - Client HTTP per API calls
-- **Context API** - State management
 
 ### Backend
 - **Node.js** - Runtime JavaScript
@@ -44,17 +41,6 @@ L'applicazione è stata deployata utilizzando servizi cloud gratuiti:
 - ✅ **API RESTful** complete
 - ✅ **Sicurezza** con JWT e password hashing
 - ✅ **Validazione dati** lato client e server
-
-## 🎨 Categorie Prodotti
-
-- Candele profumate
-- Candele decorative
-- Candele votive
-- Tealight
-- Candele galleggianti
-- Candele pilastro
-- Candele in cera di soia
-- Candele in cera d'api
 
 ## 🔧 Installazione Locale
 
@@ -112,11 +98,3 @@ Il progetto include configurazione Docker per deployment containerizzato:
 # Avvia con Docker Compose
 docker-compose up --build
 ```
-
-## 👨‍💻 Sviluppatore
-
-Progetto sviluppato come parte del corso universitario di Sviluppo Web.
-
-## 📄 Licenza
-
-Questo progetto è stato creato per scopi educativi nell'ambito universitario.
