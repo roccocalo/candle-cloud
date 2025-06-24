@@ -5,8 +5,7 @@ build
 Dockerfile*
 docker-compose*
 README.md
-.env.local
-.env.production
+.env
 .git
 .gitignore
 screenshots
